@@ -11,15 +11,6 @@ export const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop : 50
   },
-  formInputsFalse: {
-    borderColor: "red",
-    borderWidth: 2,
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    marginTop: 10,
-    borderRadius: 5,
-  },
 flexCenter :{
   display:'flex',
   alignItems:'center'
