@@ -1,0 +1,51 @@
+import React, {useEffect, useState} from 'react';
+import {TextInput, TouchableOpacity, Text, View} from 'react-native';
+import Header from '../../components/Header';
+import {styles} from '../commonStyle';
+import Input from '../../components/Input';
+import Button, {TextOnlyButton} from '../../components/Button';
+
+const Login = () => {
+  const [inputs, setInputs] = useState();
+
+  const handleInputs = (value, key) => {
+    setInputs({
+      ...inputs,
+      [key]: value,
+    });
+  };
+  
+  return (
+    <View style={styles.FormBody}>
+      <Header heading="Login" style={styles.heading} />
+      <Input
+        label="Email"
+        placeholder="Email"
+        value={inputs.email}
+        onChangeText={e => {
+          handleInputs(e, 'email');
+        }}
+      />
+
+      <Input
+        label="password"
+        placeholder="Password"
+        secureTextEntry={true}
+        value={inputs.password}
+        onChangeText={e => {
+          handleInputs(e, 'password');
+        }}
+      />
+
+      <View style={styles.flexCenter}>
+        <Button text="Login" />
+        <TextOnlyButton
+          text="new user? sign up instead"
+          style={{marginTop: 10}}
+        />
+      </View>
+    </View>
+  );
+};
+
+export default Login;
