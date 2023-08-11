@@ -16,19 +16,23 @@ export const appSlice = createSlice({
     },
     loginRed: (state, actions) => {
       const {email, password} = actions.payload;
-      state.users.forEach(item => {
-        const user = state.users.find(
-          item => item.email === email && item.password === password,
-        );
-        if (user) {
-          state.loginUser = {user};
-          state.isLoggedIn = true;
-        }
-        {
-          state.error =
-            'user is not registered or incorrect email and password';
-        }
-      });
+
+      if (state.users.length) {
+        state.users.forEach(item => {
+          const user = state.users.find(
+            item => item.email === email && item.password === password,
+          );
+          if (user) {
+            state.loginUser = {user};
+            state.isLoggedIn = true;
+          } else {
+            state.error =
+              'user is not registered or incorrect email and password';
+          }
+        });
+      } else {
+        state.error = 'user is not registered or incorrect email and password';
+      }
     },
     resetLogin: state => {
       state.isLoggedIn = false;

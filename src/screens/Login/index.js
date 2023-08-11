@@ -9,6 +9,7 @@ import {loginRed, resetLogin} from '../../redux/slices/appSlice.slice';
 
 const Login = ({navigation}) => {
   const [inputs, setInputs] = useState({});
+  const [errors, setErrors] = useState('');
   const dispatch = useDispatch();
   const {isLoggedIn, error} = useSelector(state => state.app);
   const handleInputs = (value, key) => {
@@ -19,7 +20,11 @@ const Login = ({navigation}) => {
   };
 
   const handleLogin = () => {
-    dispatch(loginRed(inputs, navigation));
+    if (inputs.email && inputs.password) {
+      dispatch(loginRed(inputs, navigation));
+    } else {
+      setErrors('Please enter email or password');
+    }
   };
 
   useEffect(() => {
@@ -27,17 +32,18 @@ const Login = ({navigation}) => {
       navigation.navigate('Home');
       dispatch(resetLogin());
     }
-    if (error) {
+    if (error || errors) {
       setTimeout(() => {
+        setErrors('');
         dispatch(resetLogin());
       }, 4000);
     }
-  }, [isLoggedIn, error, dispatch, navigation]);
+  }, [isLoggedIn, error, errors, dispatch, navigation]);
 
   return (
     <View style={styles.FormBody}>
       <Header heading="Login" style={styles.heading} />
-      {error && <Text>{error}</Text>}
+      {(error || errors) && <Text>{error ? error : errors}</Text>}
       <Input
         label="Email"
         placeholder="Email"
