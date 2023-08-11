@@ -4,7 +4,7 @@ import apiSlice from './slices/apiSlice'
 
 export const store = configureStore({
   reducer: {
-    appReducer,
+    app:appReducer,
     api:apiSlice
   },
 })

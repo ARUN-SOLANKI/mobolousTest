@@ -4,9 +4,16 @@ import Header from '../../components/Header';
 import {styles} from '../commonStyle';
 import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
+import {useDispatch, useSelector} from 'react-redux';
+import {signup} from '../../redux/slices/appSlice.slice';
 
 const SignUp = ({navigation}) => {
   const [inputs, setInputs] = useState();
+  const dispatch = useDispatch();
+
+  const data = useSelector(state => state);
+
+  console.log(data, '++++++++');
 
   const handleInputs = (value, key) => {
     setInputs({
@@ -14,6 +21,11 @@ const SignUp = ({navigation}) => {
       [key]: value,
     });
   };
+
+  const handleSignUp = () => {
+    dispatch(signup(inputs));
+  };
+
 
   return (
     <View style={styles.FormBody}>
@@ -43,7 +55,13 @@ const SignUp = ({navigation}) => {
       />
 
       <View style={styles.flexCenter}>
-        <Button text="Sign Up" onPress={() => navigation.navigate('Login')} />
+        <Button
+          text="Sign Up"
+          onPress={() => {
+            handleSignUp();
+            navigation.navigate('Login');
+          }}
+        />
         <TextOnlyButton
           text=" already a user? login instead"
           style={{marginTop: 10}}

@@ -4,9 +4,12 @@ import Header from '../../components/Header';
 import {styles} from '../commonStyle';
 import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
+import { useDispatch } from 'react-redux';
+import { loginRed } from '../../redux/slices/appSlice.slice';
 
 const Login = ({navigation}) => {
   const [inputs, setInputs] = useState({});
+  const dispatch = useDispatch()
 
   const handleInputs = (value, key) => {
     setInputs({
@@ -14,6 +17,10 @@ const Login = ({navigation}) => {
       [key]: value,
     });
   };
+
+  const handleLogin = ()=>{
+    dispatch(loginRed(inputs, navigation))
+  }
 
   return (
     <View style={styles.FormBody}>
@@ -38,7 +45,7 @@ const Login = ({navigation}) => {
       />
 
       <View style={styles.flexCenter}>
-        <Button text="Login" onPress={() => navigation.navigate('Home')} />
+        <Button text="Login" onPress={() => handleLogin()} />
         <TextOnlyButton
           onPress={() => navigation.navigate('SignUp')}
           text="new user? sign up instead"
