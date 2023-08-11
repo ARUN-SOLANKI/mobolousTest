@@ -5,37 +5,49 @@ import {styles} from '../commonStyle';
 import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
 
-const SignUp = () => {
-  const [inputs , setInputs] = useState();
+const SignUp = ({navigation}) => {
+  const [inputs, setInputs] = useState();
 
-  const handleInputs = (value , key) =>{
+  const handleInputs = (value, key) => {
     setInputs({
       ...inputs,
-      [key] : value
-    })
-  }
-
-
+      [key]: value,
+    });
+  };
 
   return (
     <View style={styles.FormBody}>
       <Header heading="Register Here" style={styles.heading} />
-      <Input label="User Name" placeholder="User Name" onChangeText={e => {handleInputs(e , "user_name")}} />
-      <Input label="Email" placeholder="Email" onChangeText={e => {handleInputs(e , "email")}} />
+      <Input
+        label="User Name"
+        placeholder="User Name"
+        onChangeText={e => {
+          handleInputs(e, 'user_name');
+        }}
+      />
+      <Input
+        label="Email"
+        placeholder="Email"
+        onChangeText={e => {
+          handleInputs(e, 'email');
+        }}
+      />
 
       <Input
         label="password"
         placeholder="Password"
-        secureTextEntry={true}  
-        onChangeText={e => {handleInputs(e , "password")}}
+        secureTextEntry={true}
+        onChangeText={e => {
+          handleInputs(e, 'password');
+        }}
       />
 
       <View style={styles.flexCenter}>
-        <Button text="Sign Up" onPress={()=>{}} />
+        <Button text="Sign Up" onPress={() => navigation.navigate('Login')} />
         <TextOnlyButton
           text=" already a user? login instead"
           style={{marginTop: 10}}
-          onPress={()=>{}}
+          onPress={() => navigation.navigate('Login')}
         />
       </View>
     </View>
@@ -43,4 +55,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-

@@ -5,8 +5,8 @@ import {styles} from '../commonStyle';
 import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
 
-const Login = () => {
-  const [inputs, setInputs] = useState();
+const Login = ({navigation}) => {
+  const [inputs, setInputs] = useState({});
 
   const handleInputs = (value, key) => {
     setInputs({
@@ -14,7 +14,7 @@ const Login = () => {
       [key]: value,
     });
   };
-  
+
   return (
     <View style={styles.FormBody}>
       <Header heading="Login" style={styles.heading} />
@@ -38,8 +38,9 @@ const Login = () => {
       />
 
       <View style={styles.flexCenter}>
-        <Button text="Login" />
+        <Button text="Login" onPress={() => navigation.navigate('Home')} />
         <TextOnlyButton
+          onPress={() => navigation.navigate('SignUp')}
           text="new user? sign up instead"
           style={{marginTop: 10}}
         />
