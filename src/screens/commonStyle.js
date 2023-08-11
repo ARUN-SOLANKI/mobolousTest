@@ -1,24 +1,24 @@
-const { StyleSheet } = require("react-native");
+const {StyleSheet} = require('react-native');
 
 export const styles = StyleSheet.create({
   FormBody: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 15,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
-  heading :{
+  heading: {
     marginBottom: 25,
-    marginTop : 50
+    marginTop: 50,
   },
-flexCenter :{
-  display:'flex',
-  alignItems:'center'
-},
-otpPage :{
- padding:10,
-},
-textOr : {
-  marginTop:16
-}
+  flexCenter: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  otpPage: {
+    padding: 10,
+  },
+  textOr: {
+    marginTop: 16,
+  },
 });
