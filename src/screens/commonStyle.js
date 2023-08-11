@@ -14,5 +14,11 @@ export const styles = StyleSheet.create({
 flexCenter :{
   display:'flex',
   alignItems:'center'
+},
+otpPage :{
+ padding:10,
+},
+textOr : {
+  marginTop:16
 }
 });

@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export const fetchData = async () => {
   try { 
-    console.log("called")
     const response = await axios.get('https://jsonplaceholder.typicode.com/photos');
     return response.data;
   } catch (error) {

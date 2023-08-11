@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "27438386504",
+    "project_id": "mobolousapp",
+    "storage_bucket": "mobolousapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27438386504:android:de4b9e7a419422f4f8377d",
+        "android_client_info": {
+          "package_name": "com.mobolousapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27438386504-tntpgkak37mq6rc1cbh0q9kok41b0g4o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobolousapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "27438386504-8p12lv7flrq7r228nqcjb634vg3rqolh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALsv3kJrgtKEtDFczPlkOk1soet5B2Tfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27438386504-8p12lv7flrq7r228nqcjb634vg3rqolh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
