@@ -5,12 +5,17 @@ import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import Home from '../screens/Home';
 import PhoneSignIn from '../screens/PhoneSignIn';
+import Onboarding from '../screens/Onboarding';
 
-// import Splash from '../screens/Splash';
 const Stack = createStackNavigator();
 export default function MyStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="onboarding"
+        component={Onboarding}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Login"
         component={Login}

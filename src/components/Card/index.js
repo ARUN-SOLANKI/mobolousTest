@@ -1,12 +1,12 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
 const Card = ({item}) => {
   return (
-    <View style={styles.cardContainer}>
+    <TouchableOpacity style={styles.cardContainer}>
       <Image source={{uri :item.url}} style={styles.cardImage} />
       <Text style={styles.cardTitle}>{item.title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
