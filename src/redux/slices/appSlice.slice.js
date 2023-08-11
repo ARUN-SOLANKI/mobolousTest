@@ -1,38 +1,42 @@
-import { CommonActions } from '@react-navigation/native';
-import { createSlice } from '@reduxjs/toolkit'
-
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-  users : [],
-  loginUser:{},
-}
+  users: [],
+  loginUser: {},
+  isLoggedIn: false,
+  error: '',
+};
 
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    signup: (state , actions) => {
-      state.users = [...state.users , actions.payload]
+    signup: (state, actions) => {
+      state.users = [...state.users, actions.payload];
     },
-    loginRed:(state , actions) => {
-      const { email, password, navigation } = actions.payload;
-        state.users.forEach((item)=>{
-          const user = state.users.find((item) => item.email === email && item.password === password);
-          if(user){
-            state.loginUser = { user };
-              navigation.dispatch(
-          CommonActions.navigate({
-            name: 'Home',
-          })
+    loginRed: (state, actions) => {
+      const {email, password} = actions.payload;
+      state.users.forEach(item => {
+        const user = state.users.find(
+          item => item.email === email && item.password === password,
         );
-          }{
-            state.loginUser = {error : "user is not registered !!"}
-          }
-        })
-    }
+        if (user) {
+          state.loginUser = {user};
+          state.isLoggedIn = true;
+        }
+        {
+          state.error =
+            'user is not registered or incorrect email and password';
+        }
+      });
+    },
+    resetLogin: state => {
+      state.isLoggedIn = false;
+      state.error = false;
+    },
   },
-})
+});
 
-export const { signup, loginRed } = appSlice.actions
+export const {signup, loginRed, resetLogin} = appSlice.actions;
 
-export default appSlice.reducer
+export default appSlice.reducer;

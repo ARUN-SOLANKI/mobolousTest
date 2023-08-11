@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {TextInput, TouchableOpacity, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import Header from '../../components/Header';
 import {styles} from '../commonStyle';
 import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
-import { useDispatch } from 'react-redux';
-import { loginRed } from '../../redux/slices/appSlice.slice';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginRed, resetLogin} from '../../redux/slices/appSlice.slice';
 
 const Login = ({navigation}) => {
   const [inputs, setInputs] = useState({});
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
+  const {isLoggedIn, error} = useSelector(state => state.app);
   const handleInputs = (value, key) => {
     setInputs({
       ...inputs,
@@ -18,13 +18,26 @@ const Login = ({navigation}) => {
     });
   };
 
-  const handleLogin = ()=>{
-    dispatch(loginRed(inputs, navigation))
-  }
+  const handleLogin = () => {
+    dispatch(loginRed(inputs, navigation));
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigation.navigate('Home');
+      dispatch(resetLogin());
+    }
+    if (error) {
+      setTimeout(() => {
+        dispatch(resetLogin());
+      }, 4000);
+    }
+  }, [isLoggedIn, error, dispatch, navigation]);
 
   return (
     <View style={styles.FormBody}>
       <Header heading="Login" style={styles.heading} />
+      {error && <Text>{error}</Text>}
       <Input
         label="Email"
         placeholder="Email"
