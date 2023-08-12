@@ -3,8 +3,8 @@ import React, {useEffect, useState} from 'react';
 import Card from '../../components/Card';
 import SimmerCard from '../../components/SimmerCard';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchApiData } from '../../redux/slices/apiSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchApiData} from '../../redux/slices/apiSlice';
 
 const Home = () => {
   useEffect(() => {
@@ -12,12 +12,13 @@ const Home = () => {
   }, [dispatch]);
 
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.api);
+  const {data, loading, error} = useSelector(state => state.api);
 
   if (!data) {
     return (
       <FlatList
         data={new Array(10)}
+        initialNumToRender={10}
         renderItem={() => {
           return <SimmerCard />;
         }}

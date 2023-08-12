@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   heading: {
     marginBottom: 25,
     marginTop: 50,
+    color: '#1a73e8',
   },
   flexCenter: {
     display: 'flex',
@@ -20,6 +21,7 @@ export const styles = StyleSheet.create({
   },
   textOr: {
     marginTop: 16,
+    color: 'black',
   },
   err: {
     color: 'red',
