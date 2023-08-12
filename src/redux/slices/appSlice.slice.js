@@ -12,7 +12,12 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     signup: (state, actions) => {
+      //   const {user_name, email, password} = actions.payload;
+      // if (user_name && email && password) {
       state.users = [...state.users, actions.payload];
+      // } else {
+      //   state.error = 'All Fields are Mandatory *';
+      // }
     },
     loginRed: (state, actions) => {
       const {email, password} = actions.payload;

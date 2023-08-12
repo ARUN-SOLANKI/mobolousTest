@@ -43,7 +43,9 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.FormBody}>
       <Header heading="Login" style={styles.heading} />
-      {(error || errors) && <Text>{error ? error : errors}</Text>}
+      {(error || errors) && (
+        <Text style={styles.err}>{error ? error : errors}</Text>
+      )}
       <Input
         label="Email"
         placeholder="Email"

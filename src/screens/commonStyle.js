@@ -21,4 +21,7 @@ export const styles = StyleSheet.create({
   textOr: {
     marginTop: 16,
   },
+  err: {
+    color: 'red',
+  },
 });
