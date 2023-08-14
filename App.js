@@ -7,12 +7,25 @@ import {store} from './src/redux/store';
 import {Provider} from 'react-redux';
 import MyStack from './src/navigator/Stack';
 import AnimatedLottieView from 'lottie-react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const [animationIsVisible, setAnimationIsVisible] = useState(true);
+  const [userInfo, setUserInfo] = useState({});
   const ref = useRef(null);
   const opacity = useRef(new Animated.Value(1));
   const progress = useRef(new Animated.Value(0));
+  useEffect(() => {
+    const userinput = async () => {
+      const isLoggedIn = await AsyncStorage.getItem('user');
+      const isOnboard = await AsyncStorage.getItem('onboarding');
+      setUserInfo({
+        isLoggedIn: JSON.parse(isLoggedIn),
+        isOnboard,
+      });
+    };
+    userinput();
+  }, []);
   useEffect(() => {
     const unsubscribe = setTimeout(() => {
       if (!progress.current) {
@@ -46,7 +59,7 @@ const App = () => {
       <NavigationContainer>
         <Provider store={store}>
           <View style={styles.container}>
-            <MyStack />
+            <MyStack userInfo={userInfo} />
           </View>
         </Provider>
       </NavigationContainer>

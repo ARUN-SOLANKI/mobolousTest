@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
@@ -14,6 +15,7 @@ export const appSlice = createSlice({
     signup: (state, actions) => {
       //   const {user_name, email, password} = actions.payload;
       // if (user_name && email && password) {
+
       state.users = [...state.users, actions.payload];
       // } else {
       //   state.error = 'All Fields are Mandatory *';
@@ -29,6 +31,7 @@ export const appSlice = createSlice({
           );
           if (user) {
             state.loginUser = {user};
+            AsyncStorage.setItem('user', JSON.stringify(user));
             state.isLoggedIn = true;
           } else {
             state.error =

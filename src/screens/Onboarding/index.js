@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {onboardingData} from '../../constant';
 import Button from '../../components/Button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Onboarding = ({navigation}) => {
   const [onborad, setOnBoard] = useState(0);
@@ -33,9 +34,10 @@ const Onboarding = ({navigation}) => {
         />
         <Button
           text="Next"
-          onPress={() => {
+          onPress={async () => {
             if (onborad == onboardingData.length - 1) {
-              navigation.navigate('Login');
+              await AsyncStorage.setItem('onboarding', 'true');
+              navigation.navigate('authStack');
             } else {
               setOnBoard(onborad + 1);
             }

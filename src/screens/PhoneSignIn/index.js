@@ -5,32 +5,27 @@
 
 // function PhoneSignIn() {
 
-
-
-
-
-
-import React , {useState} from 'react'
+import React, {useState} from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { styles } from '../commonStyle';
-import { View } from 'react-native';
+import {styles} from '../commonStyle';
+import {View} from 'react-native';
 
 const PhoneSignIn = () => {
-    const [confirm, setConfirm] = useState(null);
-    const [code, setCode] = useState('');
-    const [mobile, setMobile]=useState("")
+  const [confirm, setConfirm] = useState(null);
+  const [code, setCode] = useState('');
+  const [mobile, setMobile] = useState('');
 
   //   // function onAuthStateChanged(user) {
-//   //   if (user) {
-//   //     navigation.navigate('home')
-//   //   }
-//   // }
+  //   //   if (user) {
+  //   //     navigation.navigate('home')
+  //   //   }
+  //   // }
 
-//   // useEffect(() => {
-//   //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-//   //   return subscriber; // unsubscribe on unmount
-//   // }, []);
+  //   // useEffect(() => {
+  //   //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+  //   //   return subscriber; // unsubscribe on unmount
+  //   // }, []);
 
   async function signInWithPhoneNumber(phoneNumber) {
     // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
@@ -44,29 +39,40 @@ const PhoneSignIn = () => {
     //   console.log('Invalid code.');
     // }
   }
-    if (!confirm) {
+  if (!confirm) {
     return (
       <View style={styles.otpPage}>
-      <Input placeholder="mobile number" onTextChange={(text)=>setMobile(text)} />
-      <View style={styles.flexCenter}>
-      <Button
-        text="Phone Number Sign In"
-        style={{width:'80%'}}
-        onPress={() => signInWithPhoneNumber('+1 650-555-3434')}
-      />
-      </View>
+        <Input
+          placeholder="mobile number"
+          onTextChange={text => setMobile(text)}
+        />
+        <View style={styles.flexCenter}>
+          <Button
+            text="Phone Number Sign In"
+            style={{width: '80%'}}
+            onPress={() => signInWithPhoneNumber('+1 650-555-3434')}
+          />
+        </View>
       </View>
     );
   }
 
   return (
     <View style={styles.otpPage}>
-      <Input placeholder="OTP" value={code} onChangeText={text => setCode(text)} />
+      <Input
+        placeholder="OTP"
+        value={code}
+        onChangeText={text => setCode(text)}
+      />
       <View style={styles.flexCenter}>
-      <Button style={{width:'80%'}} text="Confirm Code" onPress={() => confirmCode()} />
+        <Button
+          style={{width: '80%'}}
+          text="Confirm Code"
+          onPress={() => confirmCode()}
+        />
       </View>
     </View>
   );
-}
+};
 
-export default PhoneSignIn
+export default PhoneSignIn;

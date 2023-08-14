@@ -7,14 +7,11 @@ import PhoneSignIn from '../screens/PhoneSignIn';
 import Onboarding from '../screens/Onboarding';
 
 const Stack = createStackNavigator();
-export default function MyStack() {
+const authStack = createStackNavigator();
+
+function authStackNav() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="onboarding"
-        component={Onboarding}
-        options={{headerShown: false}}
-      />
       <Stack.Screen
         name="Login"
         component={Login}
@@ -26,7 +23,33 @@ export default function MyStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen name="phone" component={PhoneSignIn} />
-      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  );
+}
+
+export default function MyStack({userInfo}) {
+  return (
+    <Stack.Navigator>
+      {!userInfo.isOnboard && (
+        <Stack.Screen
+          name="onboarding"
+          component={Onboarding}
+          options={{headerShown: false}}
+        />
+      )}
+      {!userInfo.isLoggedIn && (
+        <Stack.Screen
+          name="authStack"
+          component={authStackNav}
+          options={{headerShown: false}}
+        />
+      )}
+
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }
