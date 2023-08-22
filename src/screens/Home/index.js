@@ -1,7 +1,15 @@
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import data from '../../utils/jsonData';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Card from '../../components/Card';
+import Button from '../../components/Button';
 
 const Home = () => {
   const [loader, setLoader] = useState(false);
@@ -28,11 +36,26 @@ const Home = () => {
 
   return (
     <View>
-      <Text style={{color: 'black'}}>index</Text>
+      <View style={styles.addInvent}>
+        <Button text="Add Inventories" style={{width: '50%'}} />
+      </View>
+      <FlatList
+        data={inventories}
+        style={{marginBottom: 100}}
+        renderItem={({item}) => {
+          return <Card item={item} />;
+        }}
+      />
     </View>
   );
 };
 
 export default Home;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  addInvent: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+});

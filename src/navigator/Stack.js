@@ -3,8 +3,6 @@ import React from 'react';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import Home from '../screens/Home';
-import PhoneSignIn from '../screens/PhoneSignIn';
-import Onboarding from '../screens/Onboarding';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +19,6 @@ function authStackNav() {
         component={SignUp}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="phone" component={PhoneSignIn} />
     </Stack.Navigator>
   );
 }
