@@ -6,8 +6,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {store} from './src/redux/store';
 import {Provider} from 'react-redux';
 import MyStack from './src/navigator/Stack';
-import AnimatedLottieView from 'lottie-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import data from './src/utils/jsonData';
 
 const App = () => {
   const [animationIsVisible, setAnimationIsVisible] = useState(true);
@@ -26,6 +26,16 @@ const App = () => {
     };
     userinput();
   }, []);
+  useEffect(() => {
+    const storeData = async () => {
+      const inventories = JSON.parse(await AsyncStorage.getItem('inventories'));
+      if (!inventories) {
+        await AsyncStorage.setItem('inventories', JSON.stringify(data));
+      }
+    };
+    storeData();
+  });
+
   useEffect(() => {
     const unsubscribe = setTimeout(() => {
       if (!progress.current) {

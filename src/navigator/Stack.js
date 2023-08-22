@@ -7,7 +7,6 @@ import PhoneSignIn from '../screens/PhoneSignIn';
 import Onboarding from '../screens/Onboarding';
 
 const Stack = createStackNavigator();
-const authStack = createStackNavigator();
 
 function authStackNav() {
   return (
@@ -30,13 +29,6 @@ function authStackNav() {
 export default function MyStack({userInfo}) {
   return (
     <Stack.Navigator>
-      {!userInfo.isOnboard && (
-        <Stack.Screen
-          name="onboarding"
-          component={Onboarding}
-          options={{headerShown: false}}
-        />
-      )}
       {!userInfo.isLoggedIn && (
         <Stack.Screen
           name="authStack"

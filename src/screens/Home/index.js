@@ -1,39 +1,34 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import Card from '../../components/Card';
-import SimmerCard from '../../components/SimmerCard';
-
-import {useDispatch, useSelector} from 'react-redux';
-import {fetchApiData} from '../../redux/slices/apiSlice';
+import data from '../../utils/jsonData';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
+  const [loader, setLoader] = useState(false);
+  const [user, setUser] = useState({});
+  const [inventories, setInventories] = useState([]);
   useEffect(() => {
-    dispatch(fetchApiData());
-  }, [dispatch]);
+    const getInventories = async () => {
+      const invent = await JSON.parse(
+        await AsyncStorage.getItem('inventories'),
+      );
+      setInventories(invent);
+    };
+    getInventories();
+  }, []);
+  console.log(inventories, 'gsdgsr');
 
-  const dispatch = useDispatch();
-  const {data, loading, error} = useSelector(state => state.api);
-
-  if (!data) {
+  if (loader) {
     return (
-      <FlatList
-        data={new Array(10)}
-        initialNumToRender={10}
-        renderItem={() => {
-          return <SimmerCard />;
-        }}
-      />
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator />
+      </View>
     );
   }
 
   return (
     <View>
-      <FlatList
-        data={data}
-        renderItem={({item}) => {
-          return <Card item={item} />;
-        }}
-      />
+      <Text style={{color: 'black'}}>index</Text>
     </View>
   );
 };

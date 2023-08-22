@@ -6,12 +6,12 @@ import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginRed, resetLogin} from '../../redux/slices/appSlice.slice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState('');
-  const dispatch = useDispatch();
-  const {isLoggedIn, error} = useSelector(state => state.app);
+
   const handleInputs = (value, key) => {
     setInputs({
       ...inputs,
@@ -19,33 +19,34 @@ const Login = ({navigation}) => {
     });
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (inputs.email && inputs.password) {
-      dispatch(loginRed(inputs, navigation));
+      const users = JSON.parse(await AsyncStorage.getItem('users'));
+
+      if (users.length) {
+        const user = users.find(
+          item =>
+            item.email === inputs.email && item.password === inputs.password,
+        );
+        if (user) {
+          console.log(user);
+          AsyncStorage.setItem('user', JSON.stringify(user));
+          navigation.navigate('Home');
+        } else {
+          setErrors('user is not registered or incorrect email and password');
+        }
+      } else {
+        setErrors('no user found...');
+      }
     } else {
       setErrors('Please enter email or password');
     }
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigation.navigate('Home');
-      dispatch(resetLogin());
-    }
-    if (error || errors) {
-      setTimeout(() => {
-        setErrors('');
-        dispatch(resetLogin());
-      }, 4000);
-    }
-  }, [isLoggedIn, error, errors, dispatch, navigation]);
-
   return (
     <View style={styles.FormBody}>
       <Header heading="Login" style={styles.heading} />
-      {(error || errors) && (
-        <Text style={styles.err}>{error ? error : errors}</Text>
-      )}
+      {errors && <Text style={styles.err}>{errors}</Text>}
       <Input
         label="Email"
         placeholder="Email"
@@ -70,13 +71,6 @@ const Login = ({navigation}) => {
         <TextOnlyButton
           onPress={() => navigation.navigate('SignUp')}
           text="new user? sign up instead"
-          style={{marginTop: 10}}
-        />
-        <Text style={styles.textOr}>OR</Text>
-
-        <TextOnlyButton
-          onPress={() => navigation.navigate('phone')}
-          text="Login With Number"
           style={{marginTop: 10}}
         />
       </View>
