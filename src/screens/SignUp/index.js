@@ -4,8 +4,6 @@ import Header from '../../components/Header';
 import {styles} from '../commonStyle';
 import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
-import {useDispatch, useSelector} from 'react-redux';
-import {signup} from '../../redux/slices/appSlice.slice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Checkbox = ({label, selected, onSelect}) => (
@@ -21,9 +19,7 @@ const SignUp = ({navigation}) => {
   const [inputs, setInputs] = useState();
   const [errors, setErrors] = useState();
   const [selectedOption, setSelectedOption] = useState('dm');
-  const dispatch = useDispatch();
 
-  const data = useSelector(state => state);
   const handleCheckboxSelect = option => {
     setSelectedOption(option === selectedOption ? null : option);
   };

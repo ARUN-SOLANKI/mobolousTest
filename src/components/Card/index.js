@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Card = ({ item, setInventories }) => {
 
   const handleRemove = async (id) => {
-    const user = await AsyncStorage.getItem('user');
+    const user = JSON.parse(await AsyncStorage.getItem('user'));
     if (user.roles === "dm") {
       Alert.alert("You are not able to change the status. For that You have to change your role")
       return
@@ -22,24 +22,26 @@ const Card = ({ item, setInventories }) => {
   }
 
   const handleAprove = async (id) => {
-    const user = await AsyncStorage.getItem('user');
+    const user = JSON.parse(await AsyncStorage.getItem('user'));
+    console.log(user,"----------")
     if (user.roles === "dm") {
       Alert.alert("You are not able to change the status. For that You have to change your role")
       return
-    }
-    const inventories = await JSON.parse(
-      await AsyncStorage.getItem('inventories'),
-    );
-    const updatedInventories = inventories.map((item) => {
-      if (item.product_id === id) {
-        return { ...item, status: "Approved" }
-      } else {
-        return item;
+    }else{
+      const inventories = await JSON.parse(
+        await AsyncStorage.getItem('inventories'),
+      );
+      const updatedInventories = inventories.map((item) => {
+        if (item.product_id === id) {
+          return { ...item, status: "Approved" }
+        } else {
+          return item;
+        }
+      })
+      if (updatedInventories.length) {
+        await AsyncStorage.setItem('inventories', JSON.stringify(updatedInventories));
+        setInventories(updatedInventories)
       }
-    })
-    if (updatedInventories.length) {
-      await AsyncStorage.setItem('inventories', JSON.stringify(updatedInventories));
-      setInventories(updatedInventories)
     }
   }
 

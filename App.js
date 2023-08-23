@@ -3,8 +3,6 @@ import {StyleSheet, View, Animated, Easing} from 'react-native';
 import Lottie from 'lottie-react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {store} from './src/redux/store';
-import {Provider} from 'react-redux';
 import MyStack from './src/navigator/Stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import data from './src/utils/jsonData';
@@ -67,11 +65,9 @@ const App = () => {
   return (
     <>
       <NavigationContainer>
-        <Provider store={store}>
           <View style={styles.container}>
             <MyStack userInfo={userInfo} />
           </View>
-        </Provider>
       </NavigationContainer>
       {animationIsVisible && (
         <Animated.View

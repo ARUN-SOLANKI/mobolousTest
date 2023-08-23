@@ -4,8 +4,6 @@ import Header from '../../components/Header';
 import {styles} from '../commonStyle';
 import Input from '../../components/Input';
 import Button, {TextOnlyButton} from '../../components/Button';
-import {useDispatch, useSelector} from 'react-redux';
-import {loginRed, resetLogin} from '../../redux/slices/appSlice.slice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {

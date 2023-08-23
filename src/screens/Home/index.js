@@ -5,6 +5,7 @@ import {
   View,
   FlatList,
   Modal,
+  Alert
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import data from '../../utils/jsonData';
@@ -15,9 +16,8 @@ import { TextInput } from 'react-native-gesture-handler';
 
 const Home = () => {
   const [loader, setLoader] = useState(false);
-  const [user, setUser] = useState({});
   const [inventories, setInventories] = useState([]);
-  const [isVisible, setVisible] = useState(true);
+  const [isVisible, setVisible] = useState(false);
   const [productData, setProductData] = useState({
     product_id: '',
     product_name: '',
@@ -74,10 +74,21 @@ const Home = () => {
     setVisible(false)
   }
 
+  const handleModal = async () => {
+    const user = JSON.parse(await AsyncStorage.getItem('user'));
+    console.log("+++++++_+_+_+")
+    if (user.roles === "dm") {
+      Alert.alert("You are not able to change the status. For that You have to change your role")
+      return
+    } else {
+      setVisible(true)
+    }
+  }
+
   return (
     <View>
       <View style={styles.addInvent}>
-        <Button text="Add Inventories" style={{ width: '50%' }} onPress={() => setVisible(true)} />
+        <Button text="Add Inventories" style={{ width: '50%' }} onPress={handleModal} />
       </View>
       <FlatList
         data={inventories}
