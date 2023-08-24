@@ -14,7 +14,7 @@ const Cards = () => {
   const dispatch = useDispatch();
   const {data, loading, error} = useSelector(state => state.api);
 
-  if (data) {
+  if (!data) {
     return (
       <FlatList
         data={new Array(10)}
