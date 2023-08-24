@@ -5,12 +5,12 @@ import Button from '../../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Onboarding = ({navigation}) => {
-  const [onborad, setOnBoard] = useState(0);
-  const [data, setdata] = useState(onboardingData[onborad]);
+  const [onboard, setOnBoard] = useState(0);
+  const [data, setdata] = useState(onboardingData[onboard]);
 
   useEffect(() => {
-    setdata(onboardingData[onborad]);
-  }, [onborad]);
+    setdata(onboardingData[onboard]);
+  }, [onboard]);
 
   return (
     <View style={styles.container}>
@@ -25,21 +25,21 @@ const Onboarding = ({navigation}) => {
       <View style={styles.btnContainer}>
         <Button
           text="Prev"
-          disabled={!!(onborad == 0)}
+          disabled={!!(onboard == 0)}
           onPress={() => {
-            if (onborad !== 0) {
-              setOnBoard(onborad - 1);
+            if (onboard !== 0) {
+              setOnBoard(onboard - 1);
             }
           }}
         />
         <Button
           text="Next"
           onPress={async () => {
-            if (onborad == onboardingData.length - 1) {
+            if (onboard == onboardingData.length - 1) {
               await AsyncStorage.setItem('onboarding', 'true');
               navigation.navigate('authStack');
             } else {
-              setOnBoard(onborad + 1);
+              setOnBoard(onboard + 1);
             }
           }}
         />

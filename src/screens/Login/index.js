@@ -72,13 +72,6 @@ const Login = ({navigation}) => {
           text="new user? sign up instead"
           style={{marginTop: 10}}
         />
-        <Text style={styles.textOr}>OR</Text>
-
-        <TextOnlyButton
-          onPress={() => navigation.navigate('phone')}
-          text="Login With Number"
-          style={{marginTop: 10}}
-        />
       </View>
     </View>
   );

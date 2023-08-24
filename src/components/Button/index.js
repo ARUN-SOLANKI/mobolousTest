@@ -1,15 +1,18 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-function Button({text,style, onPress, ...props}) {
+function Button({text, style, onPress, ...props}) {
   return (
-    <TouchableOpacity style={[styles.submitForm, style]} onPress={onPress} {...props}>
+    <TouchableOpacity
+      style={[styles.submitForm, style]}
+      onPress={onPress}
+      {...props}>
       <Text style={styles.submitText}>{text}</Text>
     </TouchableOpacity>
   );
 }
 
-export function TextOnlyButton({text , style , onPress}) {
+export function TextOnlyButton({text, style, onPress}) {
   return (
     <TouchableOpacity style={style} onPress={onPress}>
       <Text style={styles.signUpOnLoginText}>{text}</Text>
@@ -21,7 +24,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   submitForm: {
-    backgroundColor: '#1a73e8',
+    backgroundColor: '#ff8000',
     padding: 10,
     marginTop: 30,
     borderRadius: 5,
@@ -35,6 +38,6 @@ const styles = StyleSheet.create({
   },
   signUpOnLoginText: {
     fontSize: 15,
-    color: "#1a73e8",
+    color: '#ff8000',
   },
 });

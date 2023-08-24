@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     marginVertical: 10,
-    backgroundColor: '#000',
+    backgroundColor: '#808080',
     padding: 10,
     marginHorizontal: 10,
     borderRadius: 10,

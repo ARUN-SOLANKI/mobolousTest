@@ -1,10 +1,10 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import Card from '../../components/Card';
-import SimmerCard from '../../components/SimmerCard';
+import {View, FlatList} from 'react-native';
+import React, {useEffect} from 'react';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchApiData} from '../../redux/slices/apiSlice';
+import {fetchApiData} from '../../redux/slices/userApiSlice';
+import UserCard from '../../components/userCard';
+import UserSimmerCard from '../../components/userSiimmerCard';
 
 const Home = () => {
   useEffect(() => {
@@ -12,26 +12,27 @@ const Home = () => {
   }, [dispatch]);
 
   const dispatch = useDispatch();
-  const {data, loading, error} = useSelector(state => state.api);
+  const {data, loading, error} = useSelector(state => state.userApi);
 
   if (!data) {
     return (
-      <FlatList
-        data={new Array(10)}
-        initialNumToRender={10}
-        renderItem={() => {
-          return <SimmerCard />;
-        }}
-      />
+      <View>
+        <FlatList
+          initialNumToRender={10}
+          data={data?.users}
+          renderItem={({item}) => {
+            return <UserSimmerCard />;
+          }}
+        />
+      </View>
     );
   }
-
   return (
     <View>
       <FlatList
-        data={data}
+        data={data?.users}
         renderItem={({item}) => {
-          return <Card item={item} />;
+          return <UserCard item={item} />;
         }}
       />
     </View>
@@ -39,5 +40,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({});

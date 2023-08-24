@@ -2,12 +2,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
-import Home from '../screens/Home';
-import PhoneSignIn from '../screens/PhoneSignIn';
 import Onboarding from '../screens/Onboarding';
+import BottomNavigator from './BottomNavigator';
 
 const Stack = createStackNavigator();
-const authStack = createStackNavigator();
 
 function authStackNav() {
   return (
@@ -22,7 +20,6 @@ function authStackNav() {
         component={SignUp}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="phone" component={PhoneSignIn} />
     </Stack.Navigator>
   );
 }
@@ -47,7 +44,7 @@ export default function MyStack({userInfo}) {
 
       <Stack.Screen
         name="Home"
-        component={Home}
+        component={BottomNavigator}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

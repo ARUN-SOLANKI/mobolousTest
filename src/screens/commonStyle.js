@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   heading: {
     marginBottom: 25,
     marginTop: 50,
-    color: '#1a73e8',
+    color: '#ff8000',
   },
   flexCenter: {
     display: 'flex',
