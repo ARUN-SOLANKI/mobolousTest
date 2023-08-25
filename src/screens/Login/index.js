@@ -12,6 +12,7 @@ const Login = ({navigation}) => {
   const [errors, setErrors] = useState('');
   const dispatch = useDispatch();
   const {isLoggedIn, error} = useSelector(state => state.app);
+
   const handleInputs = (value, key) => {
     setInputs({
       ...inputs,

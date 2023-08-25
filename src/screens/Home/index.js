@@ -1,42 +1,42 @@
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Image, StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {fetchApiData} from '../../redux/slices/userApiSlice';
-import UserCard from '../../components/userCard';
-import UserSimmerCard from '../../components/userSiimmerCard';
+import {useSelector} from 'react-redux';
 
-const Home = () => {
-  useEffect(() => {
-    dispatch(fetchApiData());
-  }, [dispatch]);
+const Home = ({route}) => {
+  const {selectedImage} = route.params || {};
+  const {images} = useSelector(state => state.images);
+  console.log(images, 'gasgag');
 
-  const dispatch = useDispatch();
-  const {data, loading, error} = useSelector(state => state.userApi);
-
-  if (!data) {
-    return (
+  return (
+    <>
       <View>
         <FlatList
-          initialNumToRender={10}
-          data={data?.users}
+          data={images}
           renderItem={({item}) => {
-            return <UserSimmerCard />;
+            console.log(item.uri, 'uri');
+            return (
+              <View style={styles.container}>
+                <Image style={styles.img} source={{uri: item.uri}} />
+              </View>
+            );
           }}
         />
       </View>
-    );
-  }
-  return (
-    <View>
-      <FlatList
-        data={data?.users}
-        renderItem={({item}) => {
-          return <UserCard item={item} />;
-        }}
-      />
-    </View>
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  img: {
+    height: 300,
+    width: '100%',
+    borderRadius: 10,
+    resizeMode: 'contain',
+  },
+});
 
 export default Home;

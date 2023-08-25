@@ -2,7 +2,6 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 import React from 'react';
 
 export default function UserCard({item}) {
-  console.log(item, 'Data');
   return (
     <View style={styles.container}>
       <View style={styles.imgCont}>
